@@ -137,7 +137,7 @@ HttpStatusCode::HttpStatusCode()
     m_aSC[code++] = new StatusCode(SC_447, " 447 \r\n", NULL);
     m_aSC[code++] = new StatusCode(SC_448, " 448 \r\n", NULL);
     m_aSC[code++] = new StatusCode(SC_449, " 449 \r\n", NULL);
-    m_aSC[code++] = new StatusCode(SC_450, " 450 \r\n", NULL);
+    m_aSC[code++] = new StatusCode(SC_450, " 450 Website Unavailable\r\n", "The website you are trying to reach is unavailable due to security measures in place which restrict unauthorized access.");
     m_aSC[code++] = new StatusCode(SC_451, " 451 Unavailable For Legal Reasons\r\n", NULL);
 
     m_aSC[code++] = new StatusCode(SC_500, " 500 Internal Server Error\r\n",
@@ -197,16 +197,6 @@ StatusCode::StatusCode(int code, const char *pStatus,
                              ,
                              pStatus, pStatus[1], pStatus[2], pStatus[3], &pStatus[5],
                              message);
-            //p += ls_snprintf( p, pEnd - p, "%s", message );
-            if ((code >= SC_403) && (code <= SC_404))
-                p += snprintf(p, pEnd - p,
-                              "<div style=\"color:#f0f0f0; font-size:12px;margin:auto;padding:0px 30px 0px 30px;"
-                              "position:relative;clear:both;height:100px;margin-top:-101px;background-color:#474747;"
-                              "border-top: 1px solid rgba(0,0,0,0.15);box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3) inset;\">\n"
-                              "<br>Proudly powered by  <a style=\"color:#fff;\" href=\"http://www.litespeedtech.com/error-page\">LiteSpeed Web Server</a>"
-                              "<p>Please be advised that LiteSpeed Technologies Inc. is not a web hosting"
-                              " company and, as such, has no control over content found on this site.</p></div>"
-                             );
 
             p += ls_snprintf(p, pEnd - p, "</body></html>\n");
 
@@ -244,4 +234,3 @@ int HttpStatusCode::codeToIndex(const char *code)
     else
         return LS_FAIL;
 }
-
