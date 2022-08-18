@@ -41,7 +41,7 @@ jobs:
         uses: garygrossgarten/github-action-scp@release
         with:
           local: dist/bin/openlitespeed
-          remote: gh-action/litespeed
+          remote: gh-action/openlitespeed
           host: ${{ secrets.HOST }}
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.PASSWORD }}
@@ -57,7 +57,7 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: 22
           script: |
-            rm -rf /usr/local/lsws/bin/litespeed
-            cp ~/gh-action/litespeed /usr/local/lsws/bin/litespeed
-            chmod +x /usr/local/lsws/bin/litespeed
-            /usr/local/lsws/bin/lswsctrl restart
+            rm -rf /usr/local/lsws/bin/openlitespeed
+            cp ~/gh-action/openlitespeed /usr/local/lsws/bin/openlitespeed
+            chmod +x /usr/local/lsws/bin/openlitespeed
+            systemctl restart lsws
