@@ -1403,7 +1403,7 @@ int HttpSession::processNewReqInit()
         }
 
         m_sessionHooks.inherit(NULL, 1);
-        return SC_404;
+        return SC_450;
     }
 
     getStream()->setLogger(pVHost->getLogger());
