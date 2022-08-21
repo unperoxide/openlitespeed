@@ -188,7 +188,7 @@ StatusCode::StatusCode(int code, const char *pStatus,
                              "<title>%s</title></head>"
                              "<body style=\"color: #444; margin:0;font: normal 14px/20px system-ui, Arial, Helvetica, sans-serif; height:100%%; background-color: #fff;\">"
                              "<div style=\"height:auto; min-height:100%%;\">"
-                             "<div style=\"text-align: center; width:800px; margin-left: -400px; position:absolute; top: 30%%; left:50%%;\">;"
+                             "<div style=\"text-align: center; width:800px; margin-left: -400px; position:absolute; top: 30%%; left:50%%;\">"
                              "<h1 style=\"margin:0; font-size:150px; line-height:150px; font-weight:bold;\">%c%c%c</h1>"
                              "<h2 style=\"margin-top:20px;font-size: 30px;\">%s</h2>"
                              "<p>%s</p>"
