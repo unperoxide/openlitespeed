@@ -20,6 +20,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <fstream>
 #include <lsr/ls_strtool.h>
 
 LS_SINGLETON(HttpStatusCode);
@@ -159,6 +160,11 @@ HttpStatusCode::HttpStatusCode()
                                    NULL);
     m_aSC[code++] = new StatusCode(SC_510, " 510 Not Extended\r\n", NULL);
 };
+
+bool HttpStatusCode::fileExists (const std::string& name) {
+    ifstream f(name.c_str());
+    return f.good();
+}
 
 HttpStatusCode::~HttpStatusCode()
 {
