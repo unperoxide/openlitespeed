@@ -20,7 +20,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <fstream>
 #include <lsr/ls_strtool.h>
 
 LS_SINGLETON(HttpStatusCode);
@@ -161,11 +160,6 @@ HttpStatusCode::HttpStatusCode()
     m_aSC[code++] = new StatusCode(SC_510, " 510 Not Extended\r\n", NULL);
 };
 
-bool HttpStatusCode::fileExists (const std::string& name) {
-    ifstream f(name.c_str());
-    return f.good();
-}
-
 HttpStatusCode::~HttpStatusCode()
 {
     int code;
@@ -186,19 +180,18 @@ StatusCode::StatusCode(int code, const char *pStatus,
             char achBuf[4096];
             char *p = achBuf;
             char *pEnd = p + 4096;
+
             p += ls_snprintf(p, pEnd - p,
-                             "<!DOCTYPE html>\n"
-                             "<html style=\"height:100%%\">\n<head>\n"
-                             "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">\n"
-                             "<title>%s</title></head>\n"
-                             "<body style=\"color: #444; margin:0;font: normal 14px/20px Arial, Helvetica, sans-serif; height:100%%; background-color: #fff;"
-                             "\">\n"
-                             "<div style=\"height:auto; min-height:100%%; \">"
-                             "     <div style=\"text-align: center; width:800px; margin-left: -400px; position:absolute; top: 30%%; left:50%%;"
-                             "\">\n"
-                             "        <h1 style=\"margin:0; font-size:150px; line-height:150px; font-weight:bold;\">%c%c%c</h1>\n"
-                             "<h2 style=\"margin-top:20px;font-size: 30px;\">%s</h2>\n"
-                             "<p>%s</p>\n"
+                             "<!DOCTYPE html>"
+                             "<html style=\"height:100%%\"><head>"
+                             "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">"
+                             "<title>%s</title></head>"
+                             "<body style=\"color: #444; margin:0;font: normal 14px/20px system-ui, Arial, Helvetica, sans-serif; height:100%%; background-color: #fff;\">"
+                             "<div style=\"height:auto; min-height:100%%;\">"
+                             "<div style=\"text-align: center; width:800px; margin-left: -400px; position:absolute; top: 30%%; left:50%%;\">;"
+                             "<h1 style=\"margin:0; font-size:150px; line-height:150px; font-weight:bold;\">%c%c%c</h1>"
+                             "<h2 style=\"margin-top:20px;font-size: 30px;\">%s</h2>"
+                             "<p>%s</p>"
                              "</div></div>"
                              ,
                              pStatus, pStatus[1], pStatus[2], pStatus[3], &pStatus[5],
